@@ -1,0 +1,2 @@
+# react-TaskFlow-App
+TaskFlow is a React-based task manager under active development. The aim is to create a clean, responsive app where users can manage and track tasks efficiently through different stages.
