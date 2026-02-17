@@ -1,9 +1,9 @@
 import React from 'react'
 import { DivideCircle, Sparkles, TrendingUp } from 'lucide-react';
 
-const Header = () => {
-  let progress = 50;
-  let activeTodos = 2;
+const Header = ({progress , activeTodos , totalTodos}) => {
+  // let progress = 50;
+  // let activeTodos = 2;
   return (
     <>
       <div className='backdrop-blur-2xl bg-white/5 rounded-3xl border border-white/10 p-6 mb-4 shadow-2xl'>

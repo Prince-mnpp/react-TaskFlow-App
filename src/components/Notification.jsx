@@ -1,9 +1,32 @@
+import { AlertCircle, CheckCircle2, X } from 'lucide-react';
 import React from 'react'
 
-const Notification = () => {
+const Notification = ({ notification, onClose }) => {
+  // let notification;
+  // let onClose;
+
+  if (!notification) return null;
   return (
     <div>
-      
+      <div
+        className='fixed top-4 right-4 z-50'
+        style={{ animation: "slideIn 0.4s ease-out" }}
+      >
+
+        <div className={`flex items-center gap-3 px-3 py-3 rounded-2xl shadow-2xl backdrop-blur-2xl border ${notification.type === "success"
+          ? "bg-emerald-500/90 border-emerald-400/50 text-white"
+          : notification.type === "error"
+            ? "bg-rose-500/50 border-rose-400/50 text-white"
+            : "bg-blue-500/90 border-blue-400/50 text-white"}`}>
+
+          {notification.type === "success" && <CheckCircle2 size={18} />}
+          {notification.type === "error" && <AlertCircle size={18} />}
+          <span className='font-semibold text-sm'>{notification.message}</span>
+          <button onClick={onClose} className='hover:opacity-80 transition-opacity'>
+            <X size={16} />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

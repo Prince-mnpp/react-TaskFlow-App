@@ -2,23 +2,23 @@ import React from 'react'
 import TodoItem from './TodoItem';
 import { Sparkles } from 'lucide-react';
 
-const TodoList = () => {
-  let todos = [];
-  let editingId;
-  let editText;
-  let onToggle;
-  let onStartEdit;
-  let onSaveEdit;
-  let onCancelEdit;
-  let onDelete;
-  let onEditTextChange;
-  let onEditKeyPress;
+const TodoList = ({ todos, onDelete, onStartEdit, onCancelEdit, onSaveEdit, editText, editingId, onEditTextChange, onEditKeyPress, onToggle}) => {
+  // let todos = [];
+  // let editingId;
+  // let editText;
+  // let onToggle;
+  // let onStartEdit;
+  // let onSaveEdit;
+  // let onCancelEdit;
+  // let onDelete;
+  // let onEditTextChange;
+  // let onEditKeyPress;
 
-  if(todos.length === 0){
+  if (todos.length === 0) {
     return (
       <div className='text-center py-16 backdrop-blur-2xl bg-white/5 rounded-2xl border border-white/0'>
-        
-        <div className='w-16 h-16 bg-linear-to-br from-violet-500/20 to-fuschia-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3'>
+
+        <div className='w-16 h-16 bg-linear-to-br from-violet-500/20 to-fuchsia-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3'>
           <Sparkles size={32} className='text-violet-300' />
         </div>
         <p className='text-white/90 text-base font-semibold mb-1'> No Tasks yet</p>
@@ -30,7 +30,7 @@ const TodoList = () => {
   return (
     <>
       <div className='space-y-2'>
-        {todos.map((todo, index) => {
+        {todos.map((todo, index) => (
           <TodoItem key={index}
             todo={todo}
             index={index}
@@ -45,7 +45,7 @@ const TodoList = () => {
             onEditKeyPress={onEditKeyPress}
 
           />
-        })}
+        ))}
       </div>
     </>
   )
