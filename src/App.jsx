@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Animate from './components/Animate'
 import Notification from './components/Notification'
 import Header from './components/Header'
@@ -6,13 +6,14 @@ import StatsGrid from './components/StatsGrid'
 import Input from './components/Input'
 import ClearButton from './components/ClearButton'
 import TodoList from './components/TodoList'
-
-const playSound = (data) => {
-
-};
+import {playSound} from './components/PlaySound'
 
 const App = () => {
   const STORAGE_KEY = "todos";
+
+  // get from localStorage
+  
+
 
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
@@ -23,9 +24,31 @@ const App = () => {
 
   console.log("my todo is:", todos);
 
-  //get from local STORAGE
+  useEffect(() => {
+    try{
+      const data = localStorage.getItem(STORAGE_KEY);
+      if(data){
+        setTodos(JSON.parse(data))
+      }
+    }
+    catch (error){
+      console.log("Load Errors:",error)
+    }
+    finally{
+      setHasLoaded(true);
+    }
+  }, [])
 
-  //save to localstorage
+  // save to local STORAGE
+  useEffect(() => {
+  if (!hasLoaded) return;
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  } catch (error) {
+    console.log("save error:", error);
+  }
+}, [todos, hasLoaded]);
 
   //show notification
   const showNotification = (message, type = "success") => {
@@ -61,7 +84,7 @@ const App = () => {
     );
     const todo = todos.find((t) => t.id === id)
     if(!todo.completed){
-      playSound("completed")
+      playSound("complete")
       showNotification("🎉 Great Job! Task completed")
     }
   };
@@ -119,7 +142,7 @@ const App = () => {
   // clear all completed Tasks
   const clearCompleted = () => {
     setTodos(todos.filter((t) => !t.completed));
-    playSound("deleted")
+    playSound("delete")
     showNotification("🚮 Task deleted", "info")
   }
 
